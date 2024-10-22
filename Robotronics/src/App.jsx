@@ -28,6 +28,7 @@ import IServices from "./pages/International/services";
 import IHome from "./pages/International/home";
 import Screen from "./pages/SplashScreen/screen"
 import Search from './component/search'
+
 function App() {
   return (
     <>
@@ -63,7 +64,6 @@ function App() {
             path="/International/videoGallery"
             element={<VideoGallery />}
           />
-          {/*  */}
           <Route path="/International/Iservices" element={<IServices />} />
           <Route path="/International/home" element={<IHome />} />
         </Routes>

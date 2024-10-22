@@ -28,16 +28,16 @@ const Header = () => {
         {/* Logo */}
         <a href="/" className="flex items-center">
           <img src={logo} alt="logo" className="w-20 h-20" />
-          <h1 className="text-xs">
+          <h1 className="text-xs poppins-light">
             ROBOTRONICS
             <br />
-            <p className="text-xs text-gold ">P A K I S T A N</p>
+            <p className="poppins-light text-gold ">P A K I S T A N</p>
           </h1>
         </a>
 
         {/* Navigation */}
         <nav className="hidden md:flex  md:items-center md:w-auto">
-          <div className="flex space-x-5 flex-row">
+          <div className="flex space-x-6 flex-row">
             <NavLink
               className="mr-3 cursor-pointer poppins-light hover:text-shadow-md hover:text-black hover:border-b hover:border-black text-black text-lg transition duration-300"
               to="/"
@@ -48,7 +48,7 @@ const Header = () => {
               className="mr-3 cursor-pointer poppins-light hover:text-black hover:border-b hover:border-black text-black text-lg "
               to="/aboutUs"
             >
-              Who We Are
+              About Us
             </NavLink>
             <NavLink
               className="mr-3 cursor-pointer poppins-light hover:text-black hover:border-b hover:border-black text-black text-lg"
@@ -70,7 +70,7 @@ const Header = () => {
             </NavLink>
             <NavLink
               className="mr-3 cursor-pointer poppins-light hover:text-black hover:border-b hover:border-black text-black text-lg"
-              to="#"
+              to="/International/videoGallery"
             >
               Events
             </NavLink>
@@ -85,6 +85,12 @@ const Header = () => {
               to="/International/home"
             >
               International
+            </NavLink>
+            <NavLink
+              className="cursor-pointer hover:text-black poppins-light hover:border-b hover:border-black text-black text-lg"
+              to="/CareerJob"
+            >
+              Careers
             </NavLink>
             <NavLink
               className="cursor-pointer hover:text-black poppins-light hover:border-b hover:border-black text-black text-lg"

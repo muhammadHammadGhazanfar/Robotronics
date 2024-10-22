@@ -63,32 +63,44 @@ const Footer = () => {
                 </h2>
                 <nav className="list-none space-y-2">
                   <li>
-                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold">
+                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold"
+                    href="/aboutUs">
                       About Us
                     </a>
                   </li>
                   <li>
-                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold">
+                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold"
+                    href="/CareerJob">
+                      Careers
+                    </a>
+                  </li>
+                  <li>
+                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold"
+                    href="/shop">
                       Shop
                     </a>
                   </li>
                   <li>
-                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold">
+                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold"
+                    href="/Blog">
                       Blog
                     </a>
                   </li>
                   <li>
-                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold">
+                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold"
+                    href="/Course">
                       Courses
                     </a>
                   </li>
                   <li>
-                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold">
+                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold"
+                    href="/International/videoGallery">
                       Gallery
                     </a>
                   </li>
                   <li>
-                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold">
+                    <a className="text-white poppins-medium cursor-pointer lg:text-xl hover:text-gold"
+                    href="/International/home">
                       Robotronics International
                     </a>
                   </li>

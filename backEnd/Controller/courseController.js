@@ -1,3 +1,4 @@
+
 const Course = require("../models/courseModel");
 const User = require("../models/User"); // Assuming your user model is named userModel
 
@@ -8,7 +9,7 @@ const createCourse = async (req, res) => {
     if (!req.user || !req.user.isInstructor) {
       return res.status(403).json({
         success: false,
-        message: `Access denied. Only instructors can create courses.  res -->  ${res}`,
+        message: 'Access denied. Only instructors can create courses.',
       });
     }
 
@@ -19,11 +20,23 @@ const createCourse = async (req, res) => {
     if (!title || !description || !duration || !price || !category) {
       return res.status(400).json({
         success: false,
-        message: "Please provide all required fields.",
+        message: 'Please provide all required fields.',
       });
     }
 
-    // Create a new course
+    // Check if a course with the same title already exists
+    const existingCourse = await Course.findOne({ title });
+    if (existingCourse) {
+      return res.status(400).json({
+        success: false,
+        message: 'A course with this title already exists.',
+      });
+    }
+
+    // Add course image path to the course object if provided
+    const image = req.file ? req.file.path : null;
+
+    // Create a new course with the uploaded image (if available)
     const course = new Course({
       title,
       description,
@@ -32,6 +45,7 @@ const createCourse = async (req, res) => {
       category,
       level,
       instructor: req.user._id, // Assign the logged-in user as the instructor
+      image, // Image path from multer
     });
 
     // Save the course to the database
@@ -40,27 +54,64 @@ const createCourse = async (req, res) => {
     // Respond with success message and the created course data
     res.status(201).json({
       success: true,
-      message: "Course created successfully",
+      message: 'Course created successfully',
       data: course,
     });
   } catch (error) {
     // Log the error for debugging
-    console.error("Error creating course:", error);
+    console.error('Error creating course:', error);
     // Respond with a server error message
     res.status(500).json({
       success: false,
-      message: `Server Error. Please try again later.${error}`,
+      message: `Server Error. Please try again later. ${error.message}`,
     });
   }
 };
 
-// Get all courses
+// Get all courses with filters
 const getAllCourses = async (req, res) => {
   try {
-    const courses = await Course.find().populate(
-      "instructor",
-      "username email"
-    ); // Assuming you want to populate instructor details
+    const { category, level, minPrice, maxPrice, minDuration, maxDuration } = req.query;
+
+    // Create a filter object
+    let filter = {};
+
+    // Add category filter if provided
+    if (category) {
+      filter.category = category;
+    }
+
+    // Add level filter if provided
+    if (level) {
+      filter.level = level;
+    }
+
+    // Add price range filter if provided
+    if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) {
+        filter.price.$gte = minPrice; // Price greater than or equal to minPrice
+      }
+      if (maxPrice) {
+        filter.price.$lte = maxPrice; // Price less than or equal to maxPrice
+      }
+    }
+
+    // Add duration range filter if provided
+    if (minDuration || maxDuration) {
+      filter.duration = {};
+      if (minDuration) {
+        filter.duration.$gte = minDuration; // Duration greater than or equal to minDuration
+      }
+      if (maxDuration) {
+        filter.duration.$lte = maxDuration; // Duration less than or equal to maxDuration
+      }
+    }
+
+    // Fetch courses based on the filters
+    const courses = await Course.find(filter).populate("instructor", "username email");
+
+    // Respond with the filtered courses
     res.status(200).json({
       success: true,
       data: courses,
@@ -69,7 +120,7 @@ const getAllCourses = async (req, res) => {
     console.error("Error fetching courses:", error);
     res.status(500).json({
       success: false,
-      message: `Server Error. Please try again later. ${error} `,
+      message: `Server Error. Please try again later. ${error}`,
     });
   }
 };

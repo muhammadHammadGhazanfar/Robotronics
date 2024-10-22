@@ -31,7 +31,7 @@ const Intro = () => {
   return (
     <>
       <div className="hero" id="hero">
-        <div className="p-5" >
+        <div className="p-5">
           <Header />
         </div>
         <div className="space-y-5" data-aos="fade-up">
@@ -40,15 +40,17 @@ const Intro = () => {
             <div className=" relative inline-block text-left">
               <button
                 type="button"
-                className="inline-flex justify-between w-full rounded-md hover:bg-brown hover:border-brown border border-lin shadow-sm px-4 py-2 bg-dropbox  poppins-regular text-gray hover:text-gold"
-                onClick={toggleDropdown}
+                className="inline-flex justify-between w-full rounded-md hover:bg-brown hover:border-brown border border-lin shadow-sm px-4 py-2 bg-dropbox poppins-regular text-gray hover:text-gold"
+                onMouseEnter={toggleDropdown} // Opens the dropdown on hover
               >
                 Our Services
                 <FaChevronDown className="ml-2" />
               </button>
 
               {isOpen && (
-                <div className="origin-top-right absolute border border-lin mt-2 w-56 rounded-md shadow-lg bg-dropbox ring-1 hover:text-brown ring-black ring-opacity-5">
+                <div className="origin-top-right absolute border border-lin mt-2 w-56 rounded-md shadow-lg bg-dropbox ring-1 hover:text-brown ring-black ring-opacity-5"
+                onMouseLeave={toggleDropdown} // Closes the dropdown when hovering out
+                >
                   <div className="py-1">
                     {services.map((service, index) => (
                       <a
@@ -70,18 +72,26 @@ const Intro = () => {
               {/* Text */}
               <div className="space-y-2">
                 <div className="flex flex-row space-x-2">
-                  <h1 className="lg:text-3xl md:text-2xl text-white poppins-thin">WELCOME TO THE </h1>
-                  <h1 className="lg:text-3xl md:text-2xl text-white poppins-extralight">WORLD OF</h1>
+                  <h1 className="lg:text-3xl md:text-2xl text-white poppins-thin">
+                    WELCOME TO THE{" "}
+                  </h1>
+                  <h1 className="lg:text-3xl md:text-2xl text-white poppins-extralight">
+                    WORLD OF
+                  </h1>
                 </div>
                 <div className="flex text-wrap">
-                  <p className="lg:text-8xl md:text-6xl text-4xl font-bold text-yellow poppins-bold">RO</p>
-                  <p className="lg:text-8xl md:text-xl text-4xl font-bold text-white poppins-bold">BOTRONICS</p>
+                  <p className="lg:text-8xl md:text-6xl text-4xl font-bold text-yellow poppins-bold">
+                    RO
+                  </p>
+                  <p className="lg:text-8xl md:text-xl text-4xl font-bold text-white poppins-bold">
+                    BOTRONICS
+                  </p>
                 </div>
                 <p className="text-wrap text-sm poppins-light text-white">
                   Lorem ipsum dolor, sit amet consectetur adipisicing elit.
                   Necessitatibus consequuntur aliquid fugit in recusandae velit
-                  quas soluta libero, sint modi obcaecati ad minus quibusdam iusto
-                  possimus molestiae pariatur amet officiis.
+                  quas soluta libero, sint modi obcaecati ad minus quibusdam
+                  iusto possimus molestiae pariatur amet officiis.
                 </p>
               </div>
               {/* button */}

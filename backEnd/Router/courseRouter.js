@@ -13,10 +13,11 @@ const {
   unenrollFromCourse,
   getStudentsInCourse,
 } = require("../Controller/courseController");
-const { protectC, isInstructor } = require("../middleware/courseMiddleware"); // Assuming you have these middlewares
+const { protectC, isInstructor,  } = require("../middleware/courseMiddleware"); // Assuming you have these middlewares
+const { multerMiddleware } = require("../middleware/multerMiddleware")
 
 // Route to create a new course (Instructor only)
-router.post("/courses", protectC, isInstructor, createCourse);
+router.post('/create-course', protectC, isInstructor, multerMiddleware, createCourse);
 
 // Route to get all courses (Open to everyone)
 router.get("/all/courses", getAllCourses);

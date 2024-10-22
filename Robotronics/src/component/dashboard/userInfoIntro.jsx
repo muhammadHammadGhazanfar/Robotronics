@@ -96,24 +96,24 @@ const UserInfoIntro = () => {
                 {userInfo.map((user, index) => (
                   <div key={index} className="py-5 flex flex-col space-y-5">
                     {/* name */}
-                    <div className="space-y-5">
-                      <div>
+                    <div className="">
+                      <div className="space-y-5" >
                         <p className="text-lightblack poppins-bold">Your Name</p>
                         <p className="text-lightblack poppins-regular">{user.name}</p>
                       </div>
                       <div className="w-full border text-sm border-lin"></div>
                     </div>
                     {/* email */}
-                    <div className="space-y-5">
-                      <div>
+                    <div className="">
+                      <div className="space-y-5" >
                         <p className="text-lightblack poppins-bold">Your Email</p>
                         <p className="text-lightblack poppins-light ">{user.email}</p>
                       </div>
                       <div className="w-full border text-sm border-lin"></div>
                     </div>
                     {/* phone */}
-                    <div className="space-y-5">
-                      <div>
+                    <div className="">
+                      <div className="space-y-5" >
                         <p className="text-lightblack poppins-bold">Phone Number</p>
                         <div className="flex flex-row poppins-light justify-between">
                           <p className="text-lightblack">{user.phone}</p>
@@ -128,11 +128,11 @@ const UserInfoIntro = () => {
                       <div className="w-full border text-sm border-lin"></div>
                     </div>
                     {/* password */}
-                    <div className="space-y-5">
-                      <div>
+                    <div className="">
+                      <div className="space-y-5" >
                         <p className="text-lightblack poppins-bold">Password</p>
                         <div className="flex flex-row justify-between">
-                          <p className="text-lightblack poppins-light">{user.password}</p>
+                          <p className="text-lightblack poppins-extrabold">{user.password}</p>
                           <a
                             className="hover:text-yellow text-brown font-bold"
                             href="#"

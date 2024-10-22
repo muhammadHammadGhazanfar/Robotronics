@@ -2,10 +2,45 @@
 const Product = require('../models/Product');
 const Review = require('../models/reviews');
 
-//    Get all products
+// Get all products with filters
 const getProducts = async (req, res) => {
   try {
-    const products = await Product.find();
+    const { category, minPrice, maxPrice, minRating, maxRating } = req.query;
+
+    // Create a filter object
+    let filter = {};
+
+    // Add category filter if provided
+    if (category) {
+      filter.category = category;
+    }
+
+    // Add price range filter if provided
+    if (minPrice || maxPrice) {
+      filter.price = {};
+      if (minPrice) {
+        filter.price.$gte = minPrice; // Price greater than or equal to minPrice
+      }
+      if (maxPrice) {
+        filter.price.$lte = maxPrice; // Price less than or equal to maxPrice
+      }
+    }
+
+    // Add rating range filter if provided
+    if (minRating || maxRating) {
+      filter.rating = {};
+      if (minRating) {
+        filter.rating.$gte = minRating; // Rating greater than or equal to minRating
+      }
+      if (maxRating) {
+        filter.rating.$lte = maxRating; // Rating less than or equal to maxRating
+      }
+    }
+
+    // Fetch products based on the filters
+    const products = await Product.find(filter);
+
+    // Respond with the filtered products
     res.status(200).json({ success: true, count: products.length, products });
   } catch (error) {
     res.status(500).json({ success: false, message: 'Server error' });
