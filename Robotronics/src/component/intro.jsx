@@ -48,8 +48,9 @@ const Intro = () => {
               </button>
 
               {isOpen && (
-                <div className="origin-top-right absolute border border-lin mt-2 w-56 rounded-md shadow-lg bg-dropbox ring-1 hover:text-brown ring-black ring-opacity-5"
-                onMouseLeave={toggleDropdown} // Closes the dropdown when hovering out
+                <div
+                  className="origin-top-right absolute border border-lin mt-2 w-56 rounded-md shadow-lg bg-dropbox ring-1 hover:text-brown ring-black ring-opacity-5"
+                  onMouseLeave={toggleDropdown} // Closes the dropdown when hovering out
                 >
                   <div className="py-1">
                     {services.map((service, index) => (

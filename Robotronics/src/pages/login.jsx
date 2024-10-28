@@ -1,16 +1,22 @@
-
-import { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import hide from "../assets/images/hide.svg";
 import facebook from "../assets/images/Facebooklogo.svg";
 import google from "../assets/images/Googlelogo.svg";
 import apple from "../assets/images/Applelogo.svg";
 import Header from "../component/header";
 
+const saveLoginData = (loginData) => {
+  sessionStorage.setItem("token", loginData.token);
+  sessionStorage.setItem("id", loginData.user._id);
+  sessionStorage.setItem("username", loginData.user.username);
+  sessionStorage.setItem("email", loginData.user.email);
+};
+
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
 
@@ -19,30 +25,32 @@ const Login = () => {
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:8080/login', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/login", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
 
       if (!response.ok) {
-        throw new Error('Login failed. Please check your credentials and try again.');
+        throw new Error(
+          "Login failed. Please check your credentials and try again."
+        );
       }
 
       const data = await response.json();
-      console.log('Login successful:', data);
-
+      console.log("Login successful:", data);
+      saveLoginData(data);
       // Display a success toast
-      toast.success('Login successful!');
-
+      toast.success("Login successful!");
+      window.location.href = "/";
       // Handle successful login (e.g., save token, redirect, etc.)
       // Example: localStorage.setItem('token', data.token);
     } catch (error) {
-      console.error('Error during login:', error);
+      console.error("Error during login:", error);
       setError(error.message);
-      
+
       // Display an error toast
       toast.error(error.message);
     }
@@ -50,7 +58,7 @@ const Login = () => {
 
   return (
     <div className="bg-gray" id="signin">
-      <div className='p-5' >
+      <div className="p-5">
         <Header />
       </div>
       <div>
@@ -78,7 +86,10 @@ const Login = () => {
           <div className="h-0 lg:w-52 w-44 border border-line"></div>
         </div>
         {/* inputs */}
-        <form onSubmit={handleLogin} className="flex flex-col items-center space-y-3">
+        <form
+          onSubmit={handleLogin}
+          className="flex flex-col items-center space-y-3"
+        >
           <div className="lg:py-8 py-4">
             <p className="text-sm poppins-regular ">Email address</p>
             <input
@@ -93,20 +104,26 @@ const Login = () => {
             <div className="flex flex-row justify-between">
               <p className="text-sm poppins-regular ">Password</p>
               <div className="flex flex-row">
-                <button type="button" onClick={() => setShowPassword(!showPassword)}>
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
                   <img src={hide} alt="Toggle Password Visibility" />
                 </button>
-                <p className="text-sm">{showPassword ? 'Hide' : 'Show'}</p>
+                <p className="text-sm">{showPassword ? "Hide" : "Show"}</p>
               </div>
             </div>
             <input
               className="border border-line rounded-xl py-3 lg:px-32 px-14 bg-gray"
-              type={showPassword ? 'text' : 'password'}
+              type={showPassword ? "text" : "password"}
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            <a href="/forgot-password" className=" poppins-regular text-sm cursor-pointer font-bold underline underline-offset-4 text-right">
+            <a
+              href="/forgot-password"
+              className=" poppins-regular text-sm cursor-pointer font-bold underline underline-offset-4 text-right"
+            >
               Forget your password
             </a>
           </div>
@@ -124,7 +141,10 @@ const Login = () => {
               Keep me signed in until I sign out
             </label>
           </div>
-          <button type="submit" className="bg-brown border border-line text-white poppins-regular rounded-3xl py-3 lg:px-32 px-14">
+          <button
+            type="submit"
+            className="bg-brown border border-line text-white poppins-regular rounded-3xl py-3 lg:px-32 px-14"
+          >
             Log in
           </button>
           {/* Error Message */}

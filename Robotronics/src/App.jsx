@@ -26,8 +26,8 @@ import CourseDetail from "./pages/Dashboard/CourseDetail";
 import VideoGallery from "./pages/International/videoGallery";
 import IServices from "./pages/International/services";
 import IHome from "./pages/International/home";
-import Screen from "./pages/SplashScreen/screen"
-import Search from './component/search'
+import Screen from "./pages/SplashScreen/screen";
+import Search from "./component/search";
 
 function App() {
   return (
