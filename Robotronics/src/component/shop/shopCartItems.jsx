@@ -78,13 +78,35 @@
 
 import React, { useState } from "react";
 import mask from "../../assets/images/shopMask.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart, removeFromCart } from "../../store/cart/cartSlice";
 
-export default function ShopCartItems({ title = "MORDERN BLACK STANDING LEGO", price = "235.41", image = "/placeholder.svg" }) {
-  const [quantity, setQuantity] = useState(1);
-  const [type, setType] = useState('Robot');
+export default function ShopCartItems({
+  title = "MORDERN BLACK STANDING LEGO",
+  price = "235.41",
+  image = "/placeholder.svg",
+  count,
+  id,
+}) {
+  const [quantity, setQuantity] = useState(count);
+  const [type, setType] = useState("Robot");
+  const cartItems = useSelector((state) => state.cart.items);
+  const totalItems = Object.values(cartItems).reduce(
+    (acc, item) => acc + item.count,
+    0
+  );
 
-  const incrementQuantity = () => setQuantity(prev => prev + 1);
-  const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
+  // const incrementQuantity = () => setQuantity((prev) => prev + 1);
+  // const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
+
+  const dispatch = useDispatch();
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id: id }));
+  };
+  const handleRemoveFromCart = () => {
+    dispatch(removeFromCart({ id: id }));
+  };
+  console.log(cartItems);
 
   return (
     <div className="max-w-4xl mx-auto p-4 sm:p-6 bg-gray">
@@ -102,12 +124,18 @@ export default function ShopCartItems({ title = "MORDERN BLACK STANDING LEGO", p
           <h1 className="text-2xl text-wrap font-bold mb-2">{title}</h1>
           <div className="flex mb-4">
             {Array.from({ length: 5 }, (_, i) => (
-              <span key={i} className="text-yellow">★</span>
+              <span key={i} className="text-yellow">
+                ★
+              </span>
             ))}
           </div>
           <div className="flex gap-4 mb-4">
             <div className="w-1/2">
-              <select className="w-full bg-gray " value={type} onChange={(e) => setType(e.target.value)}>
+              <select
+                className="w-full bg-gray"
+                value={type}
+                onChange={(e) => setType(e.target.value)}
+              >
                 <option value="Robot">Robot</option>
                 <option value="Vehicle">Vehicle</option>
                 <option value="Building">Building</option>
@@ -115,22 +143,24 @@ export default function ShopCartItems({ title = "MORDERN BLACK STANDING LEGO", p
             </div>
             <div className="w-1/2 flex">
               <div className="flex-1 rounded-l-md border border-lin bg-gray p-2 flex items-center justify-between">
-                <div className="bg-gray" >Number:</div>
-                <div className="bg-gray" >{quantity}</div>
+                <div className="bg-gray">Number:</div>
+                <div className="bg-gray">{totalItems}</div>
               </div>
               <button
                 className="rounded-none border-y p-2 border-r border-lin"
-                onClick={decrementQuantity}
-              >-</button>
+                onClick={handleRemoveFromCart}
+              >
+                -
+              </button>
               <button
                 className="rounded-r-md border-y p-2 border-r border-lin"
-                onClick={incrementQuantity}
-              >+</button>
+                onClick={handleAddToCart}
+              >
+                +
+              </button>
             </div>
           </div>
-          <div className="text-2xl font-bold mb-4 text-right">
-            PKR {price}
-          </div>
+          <div className="text-2xl font-bold mb-4 text-right">PKR {price}</div>
         </div>
       </div>
     </div>

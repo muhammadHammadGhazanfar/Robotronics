@@ -3,10 +3,18 @@ import shopStar from "../../assets/logo/shopStars.svg";
 import time from "../../assets/logo/time-svgrepo-com 1.svg";
 import download from "../../assets/logo/download.svg";
 import sale from "../../assets/logo/sales.svg";
-const CourseProduct = ({ title, description, image, price, category }) => {
+const CourseProduct = ({
+  title,
+  id,
+  description,
+  image,
+  price,
+  duration,
+  category,
+}) => {
   return (
     <div className="p-2  " data-aos="fade-up">
-      <div className="rounded-2xl p-2 bg-white" >
+      <div className="rounded-2xl p-2 bg-white">
         {/* img */}
         <div className="">
           <img src={python} alt="" />
@@ -14,7 +22,9 @@ const CourseProduct = ({ title, description, image, price, category }) => {
         {/* title */}
         <div>
           <div className="flex flex-row flex-wrap justify-between">
-            <p className="lg:text-xl p-1 text-center text-wrap font-bold">{title}</p>
+            <p className="lg:text-xl p-1 text-center text-wrap font-bold">
+              {title}
+            </p>
             <img src={shopStar} alt="" />
           </div>
           <div className="text-right">
@@ -29,7 +39,7 @@ const CourseProduct = ({ title, description, image, price, category }) => {
         <div className="flex flex-wrap justify-center lg:space-x-2 items-center">
           <div className="flex ">
             <img className=" text-xs" src={time} />
-            22hr 30min
+            {duration}
           </div>
           <div className="flex">
             <img className=" text-xs" src={download} />
@@ -42,20 +52,15 @@ const CourseProduct = ({ title, description, image, price, category }) => {
         </div>
       </div>
       {/* button */}
-     <div className="py-2" >
-     <a href="/CoursesProduct">
-     <div className="text-center bg-yellow p-2">
-        
-        <button
-          className="bg-yellow text-xl p-3 font-bold rounded"
-        >
-          Buy Course
-        </button>
-        
+      <div className="py-2">
+        <a href={`/CoursesProduct/${id}`}>
+          <div className="text-center bg-yellow p-2">
+            <button className="bg-yellow text-xl p-3 font-bold rounded">
+              Buy Course
+            </button>
+          </div>
+        </a>
       </div>
-      </a>
-     </div>
-
     </div>
   );
 };

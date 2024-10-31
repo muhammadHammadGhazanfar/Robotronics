@@ -1,13 +1,20 @@
 import { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo/Robotrinic.svg";
 import basket from "../assets/logo/basket.svg";
 import Aos from "aos";
+import { useSelector } from "react-redux";
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState("");
+  const navigate = useNavigate();
+  const cartItems = useSelector((state) => state.cart.items);
+  const totalItems = Object.values(cartItems).reduce(
+    (acc, item) => acc + item.count,
+    0
+  );
 
   useEffect(() => {
     Aos.init(); // Initialize AOS library
@@ -139,7 +146,20 @@ export default function Header() {
                 </NavLink>
               </div>
             )}
-            <img className="flex" src={basket} alt="basket" />
+            {/* <img className="flex" src={basket} alt="basket" /> */}
+            <div
+              className="relative cursor-pointer"
+              onClick={() => {
+                navigate("/cart");
+              }}
+            >
+              <span className="text-2xl">🛒</span>
+              {totalItems > 0 && (
+                <span className="absolute top-[-8px] right-[-10px] bg-red-600 text-white rounded-full text-xs font-bold px-2">
+                  {totalItems}
+                </span>
+              )}
+            </div>
           </div>
         </nav>
 

@@ -1,4 +1,7 @@
+import { useSelector } from "react-redux";
 import ShopCartItems from "../shop/shopCartItems";
+import { useEffect, useState } from "react";
+
 const ShopCartproductList = () => {
   const products = [
     {
@@ -29,20 +32,52 @@ const ShopCartproductList = () => {
       category: "Electronics",
     },
   ];
+
+  const cartItems = useSelector((state) => state.cart.items);
+
+  console.log("cartItems", cartItems);
+
+  const [items, setItems] = useState([]);
+  const fetchItem = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/courses/${id}`);
+      const data = await response.json();
+      return { count: cartItems[id].count, ...data };
+    } catch (error) {
+      console.error(`Error fetching item with ID ${id}:`, error);
+      return null; // Handle error as needed
+    }
+  };
+
+  useEffect(() => {
+    const fetchAllCartItems = async () => {
+      const ids = Object.keys(cartItems); // Extract the IDs from cartItems
+      const itemPromises = ids.map((id) => fetchItem(id)); // Map IDs to fetch promises
+      const itemsData = await Promise.all(itemPromises); // Wait for all API calls
+      const validItemsData = itemsData.filter((item) => item !== null); // Filter out any null results
+      setItems(validItemsData); // Update state with fetched items
+    };
+
+    fetchAllCartItems();
+  }, []);
+  console.log("items", items);
+
   return (
     // body of the page
     <div className="lg:flex flex-row">
       {/* items */}
       <div className="lg:flex lg:w-2/3 flex-col lg:px-5 shadow-lg bg-gray ">
-        {products.map((product) => {
+        {items.map((product) => {
           return (
             <ShopCartItems
-              key={product.id}
-              title={product.title}
-              description={product.description}
-              image={product.image}
-              price={product.price}
-              category={product.category}
+              key={product?.data?._id}
+              id={product?.data?._id}
+              count={product?.count}
+              title={product?.data?.title}
+              description={product?.data?.description}
+              image={product?.data?.image}
+              price={product?.data?.price}
+              category={product?.data?.category}
             />
           );
         })}

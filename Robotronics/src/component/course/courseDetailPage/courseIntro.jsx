@@ -1,8 +1,16 @@
 import robo from "../../../assets/images/shopRobot.svg";
 import python from "../../../assets/images/python.svg";
 import star from "../../../assets/images/shopStar.svg";
+import { useDispatch } from "react-redux";
+
 import Header from "../../header";
-const CourseIntro = () => {
+import { addToCart } from "../../../store/cart/cartSlice";
+const CourseIntro = ({ title, id, image, price }) => {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ id: id }));
+  };
   return (
     <div className="bg-lightgray">
       <div className="p-5 ">
@@ -46,9 +54,7 @@ const CourseIntro = () => {
         <div className="p-5 lg:px-24 lg:space-y-5 space-y-3 ">
           {/* title */}
           <div>
-            <p className="poppins-bold text-brown lg:text-6xl ">
-              Python Course
-            </p>
+            <p className="poppins-bold text-brown lg:text-6xl ">{title}</p>
           </div>
           {/* sale */}
           <div className="space-y-8">
@@ -65,8 +71,12 @@ const CourseIntro = () => {
             </div>
             {/* text */}
             <div className="flex flex-row space-x-2 ">
-              <p className="text-sm text-line poppins-thin">261 products sold .</p>
-              <p className="text-sm text-line poppins-thin">3,1k products watched</p>
+              <p className="text-sm text-line poppins-thin">
+                261 products sold .
+              </p>
+              <p className="text-sm text-line poppins-thin">
+                3,1k products watched
+              </p>
             </div>
           </div>
           <div className="flex flex-row  space-x-2">
@@ -78,8 +88,10 @@ const CourseIntro = () => {
               >
                 TYPE:
               </label>
-              <select id="cars border lg:text-base text-line text-center text-sm border border-gray bg-brown"
-                className="bg-gray">
+              <select
+                id="cars border lg:text-base text-line text-center text-sm border border-gray bg-brown"
+                className="bg-gray"
+              >
                 <option value="volvo poppins-thin">ROBOT</option>
                 <option value="saab poppins-thin">ROBOT</option>
                 <option value="vw poppins-thin">ROBOT</option>
@@ -90,7 +102,7 @@ const CourseIntro = () => {
               {/* Decrease button */}
               <button
                 className="lg:px-3 px-1 lg:py-1 bg-gray-200 rounded-md text-gray-700 hover:bg-gray-300 focus:outline-none"
-              // onClick={handleDecrease}
+                // onClick={handleDecrease}
               >
                 -
               </button>
@@ -106,16 +118,15 @@ const CourseIntro = () => {
               {/* Increase button */}
               <button
                 className="px-3 py-1 bg-gray-200 rounded-md text-gray-700 hover:bg-gray-300 focus:outline-none"
-              // onClick={handleIncrease}
+                // onClick={handleIncrease}
               >
                 +
               </button>
             </div>
-
           </div>
-          <div className="text-yellow text-2xl poppins-bold">Pkr 2352.41</div>
+          <div className="text-yellow text-2xl poppins-bold">Pkr {price}</div>
           {/* select */}
-          <div className="flex flex-row lg:space-x-36 space-x-20 " >
+          <div className="flex flex-row lg:space-x-36 space-x-20 ">
             {/* select course */}
             <div className="lg:px-5 bg-gray text-line text-center justify-center">
               <label
@@ -124,23 +135,27 @@ const CourseIntro = () => {
               >
                 TYPE:
               </label>
-              <select id="cars "
-                className="bg-gray border border-gray border lg:text-base text-line text-center text-sm">
+              <select
+                id="cars "
+                className="bg-gray border-gray border lg:text-base text-line text-center text-sm"
+              >
                 <option value="volvo poppins-thin">ROBOT</option>
                 <option value="saab poppins-thin">ROBOT</option>
                 <option value="vw poppins-thin">ROBOT</option>
               </select>
             </div>
             {/* select time slot */}
-            <div className="lg:px-5 bg-gray text-line text-center justify-center" >
+            <div className="lg:px-5 bg-gray text-line text-center justify-center">
               <label
                 htmlFor="robot border-non bg-white "
                 aria-placeholder="TYPE"
               >
                 TYPE:
               </label>
-              <select id="cars border lg:text-base text-line text-center text-sm border border-gray bg-brown"
-                className="bg-gray">
+              <select
+                id="cars border lg:text-base text-line text-center text-sm border border-gray bg-brown"
+                className="bg-gray"
+              >
                 <option value="volvo poppins-thin">ROBOT</option>
                 <option value="saab poppins-thin">ROBOT</option>
                 <option value="vw poppins-thin">ROBOT</option>
@@ -149,26 +164,30 @@ const CourseIntro = () => {
           </div>
           {/* buy now */}
           <div className="lg:flex flex-row justify-between lg:space-x-10 ">
-
             <div className="flex flex-row space-x-5">
               {/* buy now button */}
               <div>
                 <a href="/cart">
-                <button className="bg-brown p-2 poppins-medium  lg:px-6 text-white rounded-lg">
-                  BUY NOW
-                </button>
+                  <button className="bg-brown p-2 poppins-medium  lg:px-6 text-white rounded-lg">
+                    BUY NOW
+                  </button>
                 </a>
               </div>
               {/* Add to card button */}
               <div>
-                <button className="bg-yellow p-2 poppins-medium  lg:px-7 text-white rounded-lg">
-                  ADD TO CARD
+                <button
+                  onClick={handleAddToCart}
+                  className="bg-yellow p-2 poppins-medium  lg:px-7 text-white rounded-lg"
+                >
+                  ADD TO CART
                 </button>
               </div>
             </div>
             {/* WISH LIST */}
             <div>
-              <button className="bg-gray p-2 px-3 poppins-medium  rounded-lg">8</button>
+              <button className="bg-gray p-2 px-3 poppins-medium  rounded-lg">
+                8
+              </button>
             </div>
           </div>
         </div>
