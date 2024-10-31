@@ -182,11 +182,13 @@ import { FaArrowRight } from "react-icons/fa";
 const ShopCoursesIntro = () => {
   const [courses, setCourses] = useState([]);
 
+  console.log("courses", courses);
+
   useEffect(() => {
     // Fetch courses from the API
-    fetch("http://localhost:8080/courses")
+    fetch("http://localhost:8080/all/courses")
       .then((response) => response.json())
-      .then((data) => setCourses(data))
+      .then((data) => setCourses(data.data))
       .catch((error) => console.error("Error fetching courses:", error));
   }, []);
 
@@ -284,15 +286,17 @@ const ShopCoursesIntro = () => {
           {/* Courses Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-5 lg:px-10">
             {/* Check if courses is an array before mapping */}
-            {Array.isArray(courses) && courses.length > 0 ? (
+            {courses.length > 0 ? (
               courses.map((course) => (
                 <CourseProduct
-                  key={course.id}
-                  title={course.title}
-                  description={course.description}
-                  image={course.image}
-                  price={course.price}
-                  category={course.category}
+                  key={course?._id}
+                  id={course?._id}
+                  title={course?.title}
+                  description={course?.description}
+                  image={course?.image}
+                  price={course?.price}
+                  category={course?.category}
+                  duration={course?.duration}
                 />
               ))
             ) : (
