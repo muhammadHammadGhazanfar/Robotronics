@@ -2,37 +2,7 @@ import { useSelector } from "react-redux";
 import ShopCartItems from "../shop/shopCartItems";
 import { useEffect, useState } from "react";
 
-const ShopCartproductList = () => {
-  const products = [
-    {
-      id: 1,
-      title: "MORDERN BLACK STANDING LEGO",
-      description:
-        "High-quality wireless headphones with noise-cancelling technology.",
-      image: "https://example.com/images/wireless-headphones.jpg",
-      price: 79.99,
-      category: "Electronics",
-    },
-    {
-      id: 2,
-      title: "MORDERN BLACK STANDING LEGO",
-      description:
-        "Lightweight running shoes designed for maximum comfort and performance.",
-      image: "https://example.com/images/running-shoes.jpg",
-      price: 59.99,
-      category: "Footwear",
-    },
-    {
-      id: 3,
-      title: "MORDERN BLACK STANDING LEGO",
-      description:
-        "High-quality wireless headphones with noise-cancelling technology.",
-      image: "https://example.com/images/wireless-headphones.jpg",
-      price: 79.99,
-      category: "Electronics",
-    },
-  ];
-
+const ShopCartproductList = ({ onNext }) => {
   const cartItems = useSelector((state) => state.cart.items);
 
   console.log("cartItems", cartItems);
@@ -66,21 +36,25 @@ const ShopCartproductList = () => {
     // body of the page
     <div className="lg:flex flex-row">
       {/* items */}
-      <div className="lg:flex lg:w-2/3 flex-col lg:px-5 shadow-lg bg-gray ">
-        {items.map((product) => {
-          return (
-            <ShopCartItems
-              key={product?.data?._id}
-              id={product?.data?._id}
-              count={product?.count}
-              title={product?.data?.title}
-              description={product?.data?.description}
-              image={product?.data?.image}
-              price={product?.data?.price}
-              category={product?.data?.category}
-            />
-          );
-        })}
+      <div className="lg:flex lg:w-2/3 flex-col lg:px-5 shadow-lg bg-gray">
+        {items.length > 0 ? (
+          items.map((product) => {
+            return (
+              <ShopCartItems
+                key={product?.data?._id}
+                id={product?.data?._id}
+                count={product?.count}
+                title={product?.data?.title}
+                description={product?.data?.description}
+                image={product?.data?.image}
+                price={product?.data?.price}
+                category={product?.data?.category}
+              />
+            );
+          })
+        ) : (
+          <div>No product in cart</div>
+        )}
       </div>
       {/* line */}
       <div className="flex flex-col bg-gray p-2">
@@ -128,15 +102,14 @@ const ShopCartproductList = () => {
               </a>
             </div> */}
           <div className="flex justify-center py-4">
-            <a href="/CustomerInfo">
-              {/* form submit buttom */}
-              <button
-                type="submit"
-                className="text-center lg:text-xl text-sm text-gold  bg-brown py-2 lg:px-20 px-10"
-              >
-                PROCEED TO CHECKOUT
-              </button>
-            </a>
+            {/* form submit buttom */}
+            <button
+              type="submit"
+              className="text-center lg:text-xl text-sm text-gold bg-brown py-2 lg:px-20 px-10"
+              onClick={onNext}
+            >
+              PROCEED TO CHECKOUT
+            </button>
           </div>
         </div>
       </div>

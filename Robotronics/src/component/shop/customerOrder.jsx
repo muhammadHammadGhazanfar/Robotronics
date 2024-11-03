@@ -1,6 +1,6 @@
 import CustomerProduct from "../../component/shop/customerProduct";
 
-const CustomerOrder = () => {
+const CustomerOrder = ({ onNext }) => {
   const products = [
     {
       id: 1,
@@ -35,7 +35,6 @@ const CustomerOrder = () => {
   ];
   return (
     <div className="lg:px-14 px-5 lg:p-8 p-4 lg:space-y-20 space-y-8 ">
-
       {/* text */}
       <div className="lg:space-y-8 space-y-4">
         <p className="lg:text-4xl text-2xl poppins-bold">YOUR ORDER</p>
@@ -90,20 +89,18 @@ const CustomerOrder = () => {
         </div>
         {/* button */}
         <div className="flex justify-center lg:py-4 py-2">
-          <a href="/Shipping">
-
-            {/* form submit buttom */}
-            <button
-              type="submit"
-              className="text-center lg:text-xl text-sm poppins-bold text-gold bg-brown py-2 lg:px-20 px-5"
-            >
-              CONTINUE TO SHIPPING
-            </button>
-          </a>
+          {/* form submit buttom */}
+          <button
+            type="submit"
+            className="text-center lg:text-xl text-sm poppins-bold text-gold bg-brown py-2 lg:px-20 px-5"
+            onClick={onNext}
+          >
+            CONTINUE TO SHIPPING
+          </button>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CustomerOrder
+export default CustomerOrder;

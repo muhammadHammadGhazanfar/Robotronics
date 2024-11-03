@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import LeftNav from "./leftNav";
 import Intro from "../dashboard/intro";
@@ -11,6 +11,17 @@ const UserInfoIntro = () => {
   const [step, setStep] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [user, setUser] = useState([]);
+  const userData = sessionStorage.getItem("id");
+  console.log("user", user);
+
+  useEffect(() => {
+    // Fetch courses from the API
+    fetch(`http://localhost:8080/find/${userData}`)
+      .then((response) => response.json())
+      .then((data) => setUser(data.data))
+      .catch((error) => console.error("Error fetching courses:", error));
+  }, []);
 
   const userInfo = [
     {
@@ -75,7 +86,7 @@ const UserInfoIntro = () => {
     <div className="bg-background">
       {/* intro */}
       <div>
-        <Intro /> 
+        <Intro />
       </div>
       {/* body */}
       <div className="lg:flex flex-row">
@@ -93,70 +104,80 @@ const UserInfoIntro = () => {
             {/* Name */}
             <div>
               <ol className="list-reset flex flex-col text-gray-600">
-                {userInfo.map((user, index) => (
-                  <div key={index} className="py-5 flex flex-col space-y-5">
-                    {/* name */}
-                    <div className="">
-                      <div className="space-y-5" >
-                        <p className="text-lightblack poppins-bold">Your Name</p>
-                        <p className="text-lightblack poppins-regular">{user.name}</p>
-                      </div>
-                      <div className="w-full border text-sm border-lin"></div>
+                <div className="py-5 flex flex-col space-y-5">
+                  {/* name */}
+                  <div className="">
+                    <div className="space-y-5">
+                      <p className="text-lightblack poppins-bold">Your Name</p>
+                      <p className="text-lightblack poppins-regular">
+                        {user.username}
+                      </p>
                     </div>
-                    {/* email */}
-                    <div className="">
-                      <div className="space-y-5" >
-                        <p className="text-lightblack poppins-bold">Your Email</p>
-                        <p className="text-lightblack poppins-light ">{user.email}</p>
-                      </div>
-                      <div className="w-full border text-sm border-lin"></div>
-                    </div>
-                    {/* phone */}
-                    <div className="">
-                      <div className="space-y-5" >
-                        <p className="text-lightblack poppins-bold">Phone Number</p>
-                        <div className="flex flex-row poppins-light justify-between">
-                          <p className="text-lightblack">{user.phone}</p>
-                          <a
-                            className="hover:text-yellow text-brown poppins-bold"
-                            href="#"
-                          >
-                            change
-                          </a>
-                        </div>
-                      </div>
-                      <div className="w-full border text-sm border-lin"></div>
-                    </div>
-                    {/* password */}
-                    <div className="">
-                      <div className="space-y-5" >
-                        <p className="text-lightblack poppins-bold">Password</p>
-                        <div className="flex flex-row justify-between">
-                          <p className="text-lightblack poppins-extrabold">{user.password}</p>
-                          <a
-                            className="hover:text-yellow text-brown font-bold"
-                            href="#"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setIsModalOpen(true);
-                              setStep(1);
-                            }}
-                          >
-                            change
-                          </a>
-                        </div>
-                      </div>
-                      <div className="w-full border text-sm border-lin"></div>
-                    </div>
+                    <div className="w-full border text-sm border-lin"></div>
                   </div>
-                ))}
+                  {/* email */}
+                  <div className="">
+                    <div className="space-y-5">
+                      <p className="text-lightblack poppins-bold">Your Email</p>
+                      <p className="text-lightblack poppins-light ">
+                        {user.email}
+                      </p>
+                    </div>
+                    <div className="w-full border text-sm border-lin"></div>
+                  </div>
+                  {/* phone */}
+                  <div className="">
+                    <div className="space-y-5">
+                      <p className="text-lightblack poppins-bold">
+                        Phone Number
+                      </p>
+                      <div className="flex flex-row poppins-light justify-between">
+                        <p className="text-lightblack">{user.phone}</p>
+                        <a
+                          className="hover:text-yellow text-brown poppins-bold"
+                          href="#"
+                        >
+                          change
+                        </a>
+                      </div>
+                    </div>
+                    <div className="w-full border text-sm border-lin"></div>
+                  </div>
+                  {/* password */}
+                  <div className="">
+                    <div className="space-y-5">
+                      <p className="text-lightblack poppins-bold">Password</p>
+                      <div className="flex flex-row justify-between">
+                        <p className="text-lightblack poppins-extrabold">
+                          {user.password}
+                        </p>
+                        <a
+                          className="hover:text-yellow text-brown font-bold"
+                          href="#"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setIsModalOpen(true);
+                            setStep(1);
+                          }}
+                        >
+                          change
+                        </a>
+                      </div>
+                    </div>
+                    <div className="w-full border text-sm border-lin"></div>
+                  </div>
+                </div>
               </ol>
             </div>
           </form>
           {/* text */}
           <div className="flex flex-row justify-between">
-            <p className="text-base poppins-bold lg:text-xl text-brown">Address</p>
-            <p className="poppins-bold text-base lg:text-xl text-brown">Add New</p>
+            <p className="text-base poppins-bold lg:text-xl text-brown">
+              Address
+            </p>
+            <p className="poppins-bold text-base lg:text-xl text-brown">
+              Add New
+            </p>
           </div>
           {/* cards */}
           <div className="flex flex-wrap lg:p-5">
@@ -166,7 +187,9 @@ const UserInfoIntro = () => {
                   <div className="space-y-5">
                     <p className="text-lightblack poppins-bold">{card.name}</p>
                     <p className="text-lightblack poppins-bold">{card.id}</p>
-                    <p className="text-lightblack poppins-bold">{card.address}</p>
+                    <p className="text-lightblack poppins-bold">
+                      {card.address}
+                    </p>
                     <div className="flex flex-row space-x-5">
                       <button className="text-sm lg:text-base poppins-light border border-lin rounded-lg px-3 py-2">
                         Home
