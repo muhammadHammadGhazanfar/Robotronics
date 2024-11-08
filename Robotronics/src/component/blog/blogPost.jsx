@@ -1,6 +1,6 @@
-import BlogCard from "./BlogCard";
 import Pagination from "./Pagination";
 import { useEffect, useState } from "react";
+import BlogCard from "./blogCard";
 
 const BlogPost = () => {
   const [currentPage, setCurrentPage] = useState(1);

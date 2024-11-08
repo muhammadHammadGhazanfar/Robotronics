@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo/Robotrinic.svg";
-import basket from "../assets/logo/basket.svg";
 import Aos from "aos";
 import { useSelector } from "react-redux";
 
@@ -10,7 +9,7 @@ export default function Header() {
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector((state) => state.cart.items) || 0;
   const totalItems = Object.values(cartItems).reduce(
     (acc, item) => acc + item.count,
     0
