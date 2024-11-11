@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo/Robotrinic.svg";
-import basket from "../assets/logo/basket.svg";
+// import basket from "../assets/logo/basket.svg";
 import Aos from "aos";
 import { useSelector } from "react-redux";
 
@@ -41,10 +41,10 @@ export default function Header() {
         {/* Logo */}
         <a href="/" className="flex items-center">
           <img src={logo} alt="logo" className="w-20 h-20" />
-          <h1 className="text-xs poppins-light">
+          <h1 className="text-xs poppins-bold">
             ROBOTRONICS
             <br />
-            <p className="poppins-light text-gold">P A K I S T A N</p>
+            <p className="poppins-bold text-gold">P A K I S T A N</p>
           </h1>
         </a>
 

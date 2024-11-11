@@ -1,3 +1,4 @@
+
 import img from "../assets/logo/arrowN-E.svg";
 import robot from "../assets/images/bosten.svg";
 import circle from "../assets/logo/twocircle.svg";
@@ -116,19 +117,19 @@ const Footer = () => {
                 <nav className="list-none space-y-4">
                   <li>
                     <span className="text-white font-bold poppins-medium lg:text-xl">Email</span>
-                    <p className="text-white poppins-regular font-thin">Robotronic@gmail.com</p>
+                    <p className="text-white text-sm text-wrap poppins-regular font-thin">Robotronic@gmail.com</p>
                   </li>
                   <li>
                     <span className="text-white font-bold poppins-medium lg:text-xl">Phone</span>
-                    <p className="text-white poppins-regular font-thin">+92 333555-66-77</p>
+                    <p className="text-white text-wrap poppins-regular font-thin">+92 333555-66-77</p>
                   </li>
                   <li>
                     <span className="text-white font-bold poppins-medium lg:text-xl">Location</span>
-                    <p className="text-white poppins-regular font-thin">2972 Westheimer Rd. Lahore, Pakistan</p>
+                    <p className="text-white text-wrap poppins-regular font-thin">2972 Westheimer Rd. Lahore, Pakistan</p>
                   </li>
                   <li>
                     <span className="text-white font-bold poppins-medium lg:text-xl">Mo - Fr</span>
-                    <p className="text-white poppins-regular font-thin">9am - 6pm</p>
+                    <p className="text-white text-wrap poppins-regular font-thin">9am - 6pm</p>
                   </li>
                 </nav>
                 <img className="w-24 mt-4" data-aos="fade-up" src={robot} alt="robot" />
@@ -207,7 +208,7 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="bg-black border-t px-10  border-white py-4">
           <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center text-center lg:text-left">
-            <p className="text-sm poppins-medium  text-white">
+            <p className="text-sm poppins-medium text-wrap  text-white">
               Copyright © 2024. All Rights Reserved. Powered by Robotronics
             </p>
             <div className="flex mt-4 lg:mt-0 space-x-3">
@@ -236,7 +237,6 @@ const Footer = () => {
           </div>
         </div>
       </footer>
-
     </div>
   );
 };

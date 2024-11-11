@@ -1,11 +1,13 @@
+
 import { FaChevronRight } from "react-icons/fa";
 import Header from "../header";
 
 const Intro = () => {
   const breadcrumbs = [
-    { name: "Home", href: "/" },
-    { name: "My Account", href: "/account" },
-    { name: "Personal Info", href: "/account/personal-info" },
+    { name: "Home", href: "/Dashboard/userInfo" },
+    { name: "profile", href: "/Dashboard/userInfo" },
+    { name: "Product", href: "/International/myRobot" },
+    { name: "Wishlist", href: "/Dashboard/WishList" },
   ];
   return (
     <div className="bg-background" >

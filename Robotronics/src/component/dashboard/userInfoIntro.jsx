@@ -11,17 +11,28 @@ const UserInfoIntro = () => {
   const [step, setStep] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [user, setUser] = useState([]);
+  const userData = sessionStorage.getItem("id");
+  console.log("user", user);
 
-  const userInfo = [
-    {
-      id: "0203455667",
-      name: "John Doe",
-      email: "johndoe@example.com",
-      phone: "123-456-7890",
-      address: "123 Main St, Anytown, USA",
-      password: ". . . . . . . . ",
-    },
-  ];
+  useEffect(() => {
+    // Fetch courses from the API
+    fetch(`http://localhost:8080/find/${userData}`)
+      .then((response) => response.json())
+      .then((data) => setUser(data.data))
+      .catch((error) => console.error("Error fetching courses:", error));
+  }, []);
+
+  // const userInfo = [
+  //   {
+  //     id: "0203455667",
+  //     name: "John Doe",
+  //     email: "johndoe@example.com",
+  //     phone: "123-456-7890",
+  //     address: "123 Main St, Anytown, USA",
+  //     password: ". . . . . . . . ",
+  //   },
+  // ];
 
   const cards = [
     {
@@ -155,8 +166,14 @@ const UserInfoIntro = () => {
           </form>
           {/* text */}
           <div className="flex flex-row justify-between">
-            <p className="text-base poppins-bold lg:text-xl text-brown">Address</p>
-            <p className="poppins-bold text-base lg:text-xl text-brown">Add New</p>
+            <p className="text-base poppins-bold lg:text-xl text-brown">
+              Address
+            </p>
+            <a href="Dashboard/userInfoForm">
+              <p className="poppins-bold text-base lg:text-xl text-brown">
+                Add New
+              </p>
+            </a>
           </div>
           {/* cards */}
           <div className="flex flex-wrap lg:p-5">

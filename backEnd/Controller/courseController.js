@@ -69,6 +69,61 @@ const createCourse = async (req, res) => {
 };
 
 // Get all courses with filters
+// const getAllCourses = async (req, res) => {
+//   try {
+//     const { category, level, minPrice, maxPrice, minDuration, maxDuration } = req.query;
+
+//     // Create a filter object
+//     let filter = {};
+
+//     // Add category filter if provided
+//     if (category) {
+//       filter.category = category;
+//     }
+
+//     // Add level filter if provided
+//     if (level) {
+//       filter.level = level;
+//     }
+
+//     // Add price range filter if provided
+//     if (minPrice || maxPrice) {
+//       filter.price = {};
+//       if (minPrice) {
+//         filter.price.$gte = minPrice; // Price greater than or equal to minPrice
+//       }
+//       if (maxPrice) {
+//         filter.price.$lte = maxPrice; // Price less than or equal to maxPrice
+//       }
+//     }
+
+//     // Add duration range filter if provided
+//     if (minDuration || maxDuration) {
+//       filter.duration = {};
+//       if (minDuration) {
+//         filter.duration.$gte = minDuration; // Duration greater than or equal to minDuration
+//       }
+//       if (maxDuration) {
+//         filter.duration.$lte = maxDuration; // Duration less than or equal to maxDuration
+//       }
+//     }
+
+//     // Fetch courses based on the filters
+//     const courses = await Course.find(filter).populate("instructor", "username email");
+
+//     // Respond with the filtered courses
+//     res.status(200).json({
+//       success: true,
+//       data: courses,
+//     });
+//   } catch (error) {
+//     console.error("Error fetching courses:", error);
+//     res.status(500).json({
+//       success: false,
+//       message: `Server Error. Please try again later. ${error}`,
+//     });
+//   }
+// };
 const getAllCourses = async (req, res) => {
   try {
     const { category, level, minPrice, maxPrice, minDuration, maxDuration } = req.query;
@@ -78,7 +133,7 @@ const getAllCourses = async (req, res) => {
 
     // Add category filter if provided
     if (category) {
-      filter.category = category;
+      filter.category = { $in: Array.isArray(category) ? category : [category] };
     }
 
     // Add level filter if provided

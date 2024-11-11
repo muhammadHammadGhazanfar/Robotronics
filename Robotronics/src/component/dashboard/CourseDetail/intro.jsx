@@ -11,6 +11,14 @@ const Intro = () => {
     <div className="bg-background">
       <div className="p-5">
         <Header />
+        <div className="pt-10 px-10" >
+          <a href="/Dashboard/MyCoursesPage">
+          <button className="hover:text-brown text-xl border border-xl border-brown hover:shadow-md p-1 rounded-xl" 
+         >
+            Back
+          </button>
+          </a>
+        </div>
       </div>
       <div className="bg-gray-100 p-6">
         <div className="max-w-7xl mx-auto">

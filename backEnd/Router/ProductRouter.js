@@ -22,7 +22,7 @@ router.get('/category/:category', getProductsByCategory);
 router.get('/:id/reviews', getProductReviews);
 
 // Admin-only routes
-router.post('/', protectC, isAdmin, addProduct);
+router.post('/addProduct', protectC, isAdmin, addProduct);
 router.put('/:id', protectC, isAdmin, updateProduct);
 router.delete('/:id', protectC, isAdmin, deleteProduct);
 
