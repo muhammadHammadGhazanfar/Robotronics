@@ -1,6 +1,6 @@
 import { FaTimes } from "react-icons/fa";
-import Intro from "../dashboard/intro"
-import LeftNav from "./leftNav";
+import Intro from "../../component/dashboard/intro"
+import LeftNav from "../../component/dashboard/leftNav";
 import img from "../../assets/images/Order-legoRobots.svg";
 
 const MyRobot = () => {

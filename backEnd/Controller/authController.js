@@ -248,7 +248,7 @@ const resetPassword = async (req, res) => {
       res.status(500).json({ message: 'Error resetting password' });
   }
 };
-
+// forgotPassword
 const forgotPassword = async (req, res) => {
     const { email } = req.body;
 

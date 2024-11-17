@@ -17,7 +17,7 @@ const { protectC, isInstructor,  } = require("../middleware/courseMiddleware"); 
 const { multerMiddleware } = require("../middleware/multerMiddleware")
 
 // Route to create a new course (Instructor only)
-router.post('/create-course', protectC, isInstructor, multerMiddleware, createCourse);
+router.post('/create-course', protectC, isInstructor, createCourse);
 
 // Route to get all courses (Open to everyone)
 router.get("/all/courses", getAllCourses);
@@ -29,7 +29,7 @@ router.get("/courses/:id", getCourseById);
 router.put("/courses/:id", protectC, isInstructor, updateCourseById);
 
 // Route to get courses by category
-router.get("/courses/category/:category", getCoursesByCategory);
+router.get("/courses/category", getCoursesByCategory);
 
 // DELETE /api/courses/:id - Delete a course by ID (Instructor only)
 router.delete('/courses/:id', protectC, isInstructor, deleteCourse);

@@ -1,3 +1,4 @@
+
 import {
   FaUser,
   FaBox,
@@ -8,24 +9,24 @@ import {
 import { useState } from "react";
 
 const LeftNav = () => {
-  const user = { userName: "Junaid" };
+  const user = { userName: "hammad" };
 
   const data = [
-    { name: "My info", href: "/", icon: <FaUser className="text-brown" /> },
+    { name: "My info", href: "/Dashboard/userInfo", icon: <FaUser className="text-brown" /> },
     { name: "My orders", icon: <FaBox className="text-brown" /> },
     {
       name: "Wishlist",
-      href: "/Wishlist",
+      href: "/Dashboard/WishList",
       icon: <FaHeart className="text-brown" />,
     },
     {
       name: "Support",
-      href: "/Support",
+      href: "/404",
       icon: <FaHeadphones className="text-brown" />,
     },
     {
       name: "Sign out",
-      href: "/Signout",
+      href: "",
       icon: <FaSignOutAlt className="text-brown" />,
     },
   ];
@@ -74,10 +75,10 @@ const LeftNav = () => {
               {index === 1 && showSubMenu && (
                 <ul className="lg:pl-20 pt-2 space-y-2">
                   <li className="rounded-e-xl lg:space-x-5 text-brown hover:text-black hover:bg-gold hover:border-l-4 border-black ">
-                    <a href="">My Products</a>
+                    <a href="/International/myRobot">My Products</a>
                   </li>
                   <li className="rounded-e-xl lg:space-x-5 text-brown hover:text-black hover:bg-gold hover:border-l-4 border-black ">
-                    <a href="">My Courses</a>
+                    <a href="/Dashboard/MyCoursesPage">My Courses</a>
                   </li>
                 </ul>
               )}

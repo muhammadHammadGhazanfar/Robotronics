@@ -28,6 +28,7 @@ import IServices from "./pages/International/services";
 import IHome from "./pages/International/home";
 import Screen from "./pages/SplashScreen/screen";
 import Search from "./component/search";
+import MyRobort from './pages/Dashboard/myRobot'
 
 function App() {
   return (
@@ -63,6 +64,7 @@ function App() {
           <Route path="/404" element={<Error />} />
           <Route path="/Dashboard/userInfoForm" element={<UserInfoForm />} />
           <Route path="/Dashboard/courseDetail" element={<CourseDetail />} />
+          <Route path="/International/myRobot" element={<MyRobort />} />
           <Route
             path="/International/videoGallery"
             element={<VideoGallery />}

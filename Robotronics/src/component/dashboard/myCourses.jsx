@@ -253,9 +253,11 @@ const MyCourses = () => {
                   </p>
                 </div>
                 <div className=" p-5 px-10 flex justify-between">
+                  <a href="/Dashboard/courseDetail">
                   <button className="bg-yellow text-white  shadow-xl poppins-bold py-2 px-4 rounded-full">
                     {course.buttonText}
                   </button>
+                  </a>
                   <span className="text-gray-700 text-base  text-center poppins-bold">
                     {course.status}
                   </span>

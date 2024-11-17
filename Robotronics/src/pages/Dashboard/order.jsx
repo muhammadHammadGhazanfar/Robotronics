@@ -1,4 +1,4 @@
-import MyRobot from "../../component/dashboard/myRobot";
+import MyRobot from "./myRobot";
 import Footer from "../../component/footer";
 const Order = () => {
   return (

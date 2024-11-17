@@ -23,16 +23,16 @@ const UserInfoIntro = () => {
       .catch((error) => console.error("Error fetching courses:", error));
   }, []);
 
-  const userInfo = [
-    {
-      id: "0203455667",
-      name: "John Doe",
-      email: "johndoe@example.com",
-      phone: "123-456-7890",
-      address: "123 Main St, Anytown, USA",
-      password: ". . . . . . . . ",
-    },
-  ];
+  // const userInfo = [
+  //   {
+  //     id: "0203455667",
+  //     name: "John Doe",
+  //     email: "johndoe@example.com",
+  //     phone: "123-456-7890",
+  //     address: "123 Main St, Anytown, USA",
+  //     password: ". . . . . . . . ",
+  //   },
+  // ];
 
   const cards = [
     {
@@ -175,9 +175,12 @@ const UserInfoIntro = () => {
             <p className="text-base poppins-bold lg:text-xl text-brown">
               Address
             </p>
-            <p className="poppins-bold text-base lg:text-xl text-brown">
-              Add New
-            </p>
+            <a href="Dashboard/userInfoForm">
+              <p className="poppins-bold text-base lg:text-xl text-brown">
+                Add New
+              </p>
+            </a>
+
           </div>
           {/* cards */}
           <div className="flex flex-wrap lg:p-5">

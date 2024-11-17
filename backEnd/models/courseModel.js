@@ -27,7 +27,7 @@ const CourseSchema = new Schema({
         required: true,
     },
     category: {
-        type: String,
+        type: ["course", "product"],
         required: true,
     },
     level: {

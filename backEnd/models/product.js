@@ -5,44 +5,44 @@ const Schema = mongoose.Schema;
 const ProductSchema = new Schema({
     name: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
     },
     description: {
         type: String,
-        required: true,
+        required: false,
         trim: true,
     },
     price: {
         type: Number,
-        required: true,
+        required: false,
     },
     category: {
         type: String,
-        required: true,
+        required: false,
     },
     stock: {
         type: Number,
-        required: true,
+        required: false,
         default: 0, // Default stock is 0
     },
     images: [{
         type: String, // Array of image URLs
-        required: true,
+        required: false,
     }],
     brand: {
         type: String,
-        required: true,
+        required: false,
     },
     ratings: [{
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: true,
+            required: false,
         },
         rating: {
             type: Number,
-            required: true,
+            required: false,
             min: 1,
             max: 5,
         },

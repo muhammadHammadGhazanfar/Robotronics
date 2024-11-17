@@ -1,5 +1,5 @@
 // controllers/productController.js
-const Product = require('../models/Product');
+const Product = require('../models/product');
 const Review = require('../models/reviews');
 
 // Get all products with filters
@@ -68,7 +68,7 @@ const addProduct = async (req, res) => {
     const product = await Product.create(req.body);
     res.status(201).json({ success: true, product });
   } catch (error) {
-    res.status(400).json({ success: false, message: 'Error creating product' });
+    res.status(400).json({ success: false, message: `Error creating product ${error}` });
   }
 };
 
