@@ -14,17 +14,21 @@ const productRoutes = require('./Router/ProductRouter.js');
 const notificationRoutes = require('./Router/notification.js');
 const blogRoutes = require('./Router/blogRouter.js')
 const contactRouter = require('./Router/contactRouter.js')
+const Wishlist = require('./Router/wishlistRouter.js')
+const cvFormRouter = require('./Router/cvFormRouter.js')
 
 //calling middlewares
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended:true }));
 
-// contact routes
-app.use('/', contactRouter)
-
+// Route to handle POST requests for contact
+app.post("/contact", contactRouter); 
 // blog routes
 app.use('/', blogRoutes)
+
+//Wishlish
+app.use('/wishlists', Wishlist)
 
 // notifications
 app.use('/notifications', notificationRoutes);
@@ -40,6 +44,11 @@ app.use('/',userRouter)
 
 // Course Management
 app.use('/',courseRoutes)
+
+
+// Use the job application routes
+app.use('/cvForm', cvFormRouter);
+
 
 // for testing 
 app.get('/test', (req, res) => {

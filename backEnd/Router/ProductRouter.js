@@ -25,7 +25,6 @@ router.get('/:id/reviews', getProductReviews);
 router.post('/addProduct', protectC, isAdmin, addProduct);
 router.put('/:id', protectC, isAdmin, updateProduct);
 router.delete('/:id', protectC, isAdmin, deleteProduct);
-
 // Review routes
 router.post('/:id/review', protectC, addReview);
 router.put('/:id/reviews/:reviewId', protectC, isAdmin, updateReview);

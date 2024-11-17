@@ -1,57 +1,45 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
+// models/Contact.js
 
-// Contact form schema (if you want to store messages in MongoDB)
-const ContactSchema = new mongoose.Schema({
+const mongoose = require('mongoose');
+
+// Define the schema for the Contact
+const contactSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
     },
     phone: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
     },
     schoolName: {
-        type: String
+        type: String,
+        trim: true,
     },
     address: {
-        type: String
+        type: String,
+        trim: true,
     },
     message: {
         type: String,
-        required: true
+        required: true,
+        trim: true,
     },
     createdAt: {
         type: Date,
-        default: Date.now
-    }
+        default: Date.now,
+    },
 });
 
-const Contact = mongoose.model("Contact", ContactSchema);
+// Create the Contact model using the schema
+const Contact = mongoose.model('Contact', contactSchema);
 
-// API to handle form submission
-router.post("/contact", async (req, res) => {
-    const { name, phone, email, schoolName, address, message } = req.body;
-
-    // Simple validation
-    if (!name || !phone || !email || !message) {
-        return res.status(400).json({ error: "All fields are required" });
-    }
-
-    try {
-        // If you want to save to MongoDB
-        const newContact = new Contact({ name, phone, email, schoolName, address, message });
-        await newContact.save();
-
-        res.status(200).json({ success: true, message: "Message received!" });
-    } catch (error) {
-        res.status(500).json({ success: false, message: "Server error" });
-    }
-});
-
-module.exports = router;
+// Export the model
+module.exports = Contact;
