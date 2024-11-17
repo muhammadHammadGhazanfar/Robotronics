@@ -1,9 +1,9 @@
 import CustomerOrder from "../../component/shop/customerOrder";
-const CustomerInfomation = () => {
+const CustomerInfomation = ({ onNext }) => {
   return (
     <div className="lg:flex flex-row p-5 bg-gray">
       {/* left */}
-      <div className="lg:w-2/3 p-8" >
+      <div className="lg:w-2/3 p-8">
         <div className="p-8 space-y-5">
           <p className="lg:text-4xl text-2xl poppins-bold ">YOUR INFOMATION</p>
           <p className="text-sm text-line poppins-regular">
@@ -172,7 +172,7 @@ const CustomerInfomation = () => {
         <div className="h-full w-0 border border-brown"></div>
       </div>
       {/* right */}
-      <CustomerOrder />
+      <CustomerOrder onNext={onNext} />
     </div>
   );
 };

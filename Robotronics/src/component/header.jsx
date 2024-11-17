@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/logo/Robotrinic.svg";
-// import basket from "../assets/logo/basket.svg";
 import Aos from "aos";
 import { useSelector } from "react-redux";
 
@@ -10,7 +9,7 @@ export default function Header() {
   const [token, setToken] = useState(null);
   const [username, setUsername] = useState("");
   const navigate = useNavigate();
-  const cartItems = useSelector((state) => state.cart.items);
+  const cartItems = useSelector((state) => state.cart.items) || 0;
   const totalItems = Object.values(cartItems).reduce(
     (acc, item) => acc + item.count,
     0
@@ -120,8 +119,13 @@ export default function Header() {
           <div className="flex gap-x-2 items-center">
             {token ? (
               <>
-                <span className="text-black poppins-light">
-                  Welcome, {username}
+                <span
+                  className="text-black poppins-light capitalize cursor-pointer hover:font-medium"
+                  onClick={() => {
+                    navigate("/Dashboard/userInfo");
+                  }}
+                >
+                  {username}
                 </span>
                 <button
                   onClick={handleLogout}
@@ -263,8 +267,13 @@ export default function Header() {
             {/* Mobile User Actions */}
             {token ? (
               <>
-                <span className="mb-2 text-black poppins-light">
-                  Welcome, {username}
+                <span
+                  className="mb-2 text-black poppins-light capitalize cursor-pointer"
+                  onClick={() => {
+                    navigate("/Dashboard/Info");
+                  }}
+                >
+                  {username}
                 </span>
                 <button
                   onClick={handleLogout}
