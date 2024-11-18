@@ -3,6 +3,10 @@ import shopStar from "../../assets/logo/shopStars.svg";
 import time from "../../assets/logo/time-svgrepo-com 1.svg";
 import download from "../../assets/logo/download.svg";
 import sale from "../../assets/logo/sales.svg";
+import { NavLink } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
+import { CiStar } from "react-icons/ci";
+import { useState } from "react";
 const CourseProduct = ({
   title,
   id,
@@ -12,6 +16,29 @@ const CourseProduct = ({
   duration,
   category,
 }) => {
+  const [wishList, setWishList] = useState(0);
+  const toggleWishList = async () => {
+    const newWishListValue = wishList === 0 ? 1 : 0;
+
+    try {
+      const response = await fetch("http://localhost:8080/wishlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      // Update the state only if the API call succeeds
+      setWishList(newWishListValue);
+    } catch (error) {
+      console.error("Failed to update wishlist:", error);
+    }
+  };
   return (
     <div className="p-2  " data-aos="fade-up">
       <div className="rounded-2xl p-2 bg-white">
@@ -27,8 +54,18 @@ const CourseProduct = ({
             </p>
             <img src={shopStar} alt="" />
           </div>
-          <div className="text-right">
-            <p className="lg:text-xl text-gold font-bold">PKR {price}</p>
+          <div onClick={toggleWishList} className="cursor-pointer">
+            {wishList === 0 ? (
+              <div className="flex justify-between">
+                <CiStar className="w-6 h-6 self-center" />
+                <p className="lg:text-xl text-gold font-bold">PKR {price}</p>
+              </div>
+            ) : (
+              <div className="flex justify-between">
+                <FaStar className="w-6 h-6 self-center" />
+                <p className="lg:text-xl text-gold font-bold">PKR {price}</p>
+              </div>
+            )}
           </div>
         </div>
         {/* line */}
@@ -53,13 +90,13 @@ const CourseProduct = ({
       </div>
       {/* button */}
       <div className="py-2">
-        <a href={`/CoursesProduct/${id}`}>
+        <NavLink to={`/CoursesProduct/${id}`}>
           <div className="text-center bg-yellow p-2">
             <button className="bg-yellow text-xl p-3 font-bold rounded">
               Buy Course
             </button>
           </div>
-        </a>
+        </NavLink>
       </div>
     </div>
   );
